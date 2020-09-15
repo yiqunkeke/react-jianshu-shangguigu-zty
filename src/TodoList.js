@@ -382,5 +382,11 @@ export default TodoList
 //#endregion
 
 //#region React 的CSS过渡动画
+// 3种方式：
+// 1. transiton
+// 2. @keyframes animationName {}
+// 3. react-transition-group 第三方模块实现动画 【推荐】
+// https://reactcommunity.org/react-transition-group/
+
 //#endregion
 
