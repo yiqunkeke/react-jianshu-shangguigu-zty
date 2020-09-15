@@ -80,6 +80,7 @@ TodoItem.propTypes = {
 } 
 
 // 设置props的默认值
+// 语法：【组件名.defaultProps】 [注意：属性名首字母是小写]
 TodoItem.defaultProps = {
     test: 'hello world'
 }

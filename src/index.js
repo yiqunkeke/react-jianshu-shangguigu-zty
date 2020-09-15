@@ -1,11 +1,13 @@
 import React from 'react';  // JSX 语法：如果在React项目中，使用了JSX语法，那么在对应的文件中，必须要引入 React
 import ReactDOM from 'react-dom';
 
-import TodoList from './TodoList';
+// import TodoList from './TodoList';
+import App from './App'  // React中实现CSS过渡动画
 
 // ReactDOM 的 render() ：把一个组件挂载到某个结点并渲染。
 ReactDOM.render(
-    <TodoList />,
+    // <TodoList />,
+    <App/>,
   document.getElementById('root')
 );
 

@@ -1,3 +1,107 @@
 .input {
     border: 1px solid red;
 }
+
+/* 1.【CSS 的过渡动画效果】：指的是 C3中的 transition */
+.show {
+    /* opacity: 1;
+    transition: all 1s ease-in; */
+    animation: show-item 1s ease-in forwards;
+}
+
+.hide {
+    /* opacity: 0;
+    transition: all 1s ease-in; */
+    animation: hide-item 1s ease-in forwards;
+}
+
+/* 2.【CSS的动画效果】： 指的是 @keyframes  */
+@keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    /* 默认情况下,animation的最后一帧效果不会被保持。
+    而是会恢复到最开始动画的状态 */
+    /* 如果需要保持一帧动画状态，在使用动画时，加上 forwards
+       如在 .hide 中{ animation: hide-item 1s ease-in forwards; }
+    */
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+}
+
+@keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    /* 默认情况下,animation的最后一帧效果不会被保持。
+    而是会恢复到最开始动画的状态 */
+    /* 如果需要保持一帧动画状态，在使用动画时，加上 forwards
+       如在 .hide 中{ animation: hide-item 1s ease-in forwards; }
+    */
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+}
+
+/* 使用上面 2 种方式的动画，比较局限，涉及到 js 动画无法处理 */
+/* 3.【使用 react-transition-group 实现动画】 */
+/* 借助 react-transition-group 这个模块，可以实现更加复杂的动画效果 */
+/* https://reactcommunity.org/react-transition-group/ */
+/* CSS Transition 
+https://reactcommunity.org/react-transition-group/css-transition
+
+import { CSSTransition } from 'react-transition-group';
+*/
+/* 入场动画：还未入场时 */
+.fade-enter {
+    opacity: 0;
+}
+/* 入场动画：从入场第二个时刻，到入场动画执行完成 */
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 1s ease-in;
+}
+/* 入场动画：入场动画完成之后，会被增加到DOM元素中 */
+.fade-enter-done {
+    opacity: 1;
+    /* color: red;  */
+}
+/* 上面 这些类中， fade-中的fade是通过 classNames="fade" 中设置的。需要与classNames中的值一致 */
+
+/*  出场动画：第一个时刻，会在DOM上增加 fade-exit 类名*/
+.fade-exit {
+    opacity: 1;
+}
+/* 出场动画：一直存在在DOM */
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+} 
+/* 出场动画：整个出场动画完成之后， */
+.fade-exit-done {
+    opacity: 0;
+}
+
+/* 这样就使用CSSTransitionGroup实现动画。 */
+
+/* 第一次加载时的类名 */
+.fade-appear {
+    opacity: 0;
+}
+.fade-appear-active {
+    opacity: 1;
+    transition: opacity 1s ease-in;
+}
