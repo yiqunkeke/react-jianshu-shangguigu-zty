@@ -387,6 +387,7 @@ export default TodoList
 // 2. @keyframes animationName {}
 // 3. react-transition-group 第三方模块实现动画 【推荐】
 // https://reactcommunity.org/react-transition-group/
+// 多个动画元素的实现
 
 //#endregion
 

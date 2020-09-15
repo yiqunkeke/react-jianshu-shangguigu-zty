@@ -57,6 +57,7 @@
 }
 
 /* 使用上面 2 种方式的动画，比较局限，涉及到 js 动画无法处理 */
+
 /* 3.【使用 react-transition-group 实现动画】 */
 /* 借助 react-transition-group 这个模块，可以实现更加复杂的动画效果 */
 /* https://reactcommunity.org/react-transition-group/ */
