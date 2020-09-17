@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import store from './store'  // 引入store
-import { getInputChangeAction, getAddItemAction, getDeleteItemAction, getInitListAction, getTodoList } from './store/actionCreators'
+import { getInputChangeAction, getAddItemAction, getDeleteItemAction, getInitList } from './store/actionCreators'
 import TodoList02UI from './TodoList02UI'
 
 class TodoList02 extends Component {
@@ -24,6 +24,7 @@ class TodoList02 extends Component {
     }
 
     componentDidMount() {
+        // 方案1.[直接在组件中写异步请求]
         // axios.get('./list.json')
         // .then((res) => {
         //     const data = res.data.list
@@ -34,11 +35,23 @@ class TodoList02 extends Component {
         //     console.log('fail')
         // })
 
-        const action = getTodoList()
-        // console.log(action)
-        store.dispatch(action) 
+        // 方案2.[使用 redux-thunk中间件，发送异步请求]
+        // 【重点】
+        // 之所以,这里可以把一个函数通过dispatch传递给store,就是因为你使用了redux-thunk.
+        // 默认情况下,action必须是一个对象.如果你不使用redux-thunk,直接在这里传递一个函数,就会报错.
+        // 当store发现dispatch进来的是一个函数时,就会自动执行这个函数.
         // 当把action【注意，这里的action不再是对象，而是函数】dispatch发给store时，这个action会自动执行
         // action就是 getTodoList函数的返回值，也是一个函数
+        // const action = getTodoList()
+        // store.dispatch(action) 
+
+        // 方案3.[使用redux-saga 将异步请求放到sagas.js文件中,单独统一处理]
+        // 默认, store可以接收到 action, 并转发给reducer,在reducer中可以拿到action
+        // 使用了 redux-saga之后, 在 sagas.js 文件中也可以拿到action
+        const action = getInitList()
+        store.dispatch(action)
+        
+        
     }
 
     handleInputChange = (e) => {
@@ -87,6 +100,21 @@ class TodoList02 extends Component {
 }
 
 export default TodoList02
+
+//#region 【Redux 概念简述】
+// 设计理念 ： 组件----> store ---->其他组件
+// Redux = Reducer + Flux
+// Flux 框架：官方推出的最原始的数据辅助型框架（为了辅助React框架）   缺点：多个store
+// Flux升级 --> Redux （融合了Reducer）
+//#endregion
+
+//#region 【Redux的工作流程】
+// Redux就是一个数据型框架：
+//  Store     React Components       Action Creators       Reducers
+// [管理员]      [借书的人]          [要借什么书] 这句话     [记录本]
+// 管理员需要通过查询记录本，才能找到你要找的书。
+// 所以，创建Store同时，需要创建并引入reducer。才算完整的创建好了仓库。
+//#endregion
 
 //#region 【使用antDesign实现todolist界面】
 // 1.安装 antDesign：
@@ -189,4 +217,24 @@ export default TodoList02
 // import { createStore, applyMiddleware } from 'redux';
 // import thunk from 'redux-thunk';
 
+//#endregion
+
+//#region 【到底什么是Redux中间件？】
+// redux-thunk 中间件：就是对dispacth方法进行升级
+// 以前dispatch方法只能接收对象，升级后可以接收函数
+
+// Redux中间件有很多： 
+// Redux-logger 
+// Redux-saga 单独把异步拆分到一个文件中去管理
+//#endregion
+
+//#region 【Redux-saga中间件的使用】
+// 再次强调：Redux 中间件，指的是 action 与 store 的中间。只有Redux 才有 action和store的概念。
+// 注意，不是 react 的中间件，而是redux 中间件
+// 
+// 使用 redux-thunk 中间件，我们把异步请求统一放到 action中管理。有助于我们做自动化测试。
+// redux-saga 也是做异步处理的中间件。
+// 在React 中，大部分会用　redux-thunk 或 redux-saga ，学会这两个，基本可以快速上手react 项目。
+
+// https://github.com/redux-saga/redux-saga
 //#endregion

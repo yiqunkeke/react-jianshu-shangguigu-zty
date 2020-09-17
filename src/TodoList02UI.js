@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { Input, Button, List } from 'antd';
 
 // 【有状态组件，包含生命周期函数，还要执行render】
 // 【耗费性能】
-// class TodoList02UI extends Component {
+// class TodoList02UI extends React.Component {
 //     render() {
 //         return (
 //             <div style={{marginTop: '10px', marginLeft: '10px'}}>
