@@ -2,12 +2,17 @@ import React from 'react';  // JSX 语法：如果在React项目中，使用了J
 import ReactDOM from 'react-dom';
 
 // import TodoList from './TodoList';
-import App from './App'  // React中实现CSS过渡动画、动画、react-transition-group动画
+import App from './App'  // 组件
+//在react中，如果要使用自己创建的组件，则组件名必须以大写字母开头，比如App，不能使用 app
 
 // ReactDOM 的 render() ：把一个组件挂载到某个结点并渲染。
 ReactDOM.render(
     // <TodoList />,
     <App/>,
+    {/* JSX语法 
+    并没有直接 App 来使用组件，而是使用了 <App/>标签的方式来使用组件。这就是JSX语法。
+    如果不引入React，（import React from 'react'）则无法编译这种React语法。
+    */}
   document.getElementById('root')
 );
 
