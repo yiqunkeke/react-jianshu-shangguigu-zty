@@ -3,7 +3,7 @@ import React, {Component, Fragment} from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'; // CSSTranstion--动画组件
 import './style.css'
 
-class App extends Component {
+class App extends Component { // 因为App要定义成一个组件。所以它必须继承react中的Component这个基类。
     constructor(props) {
         super(props)
         this.state = {
